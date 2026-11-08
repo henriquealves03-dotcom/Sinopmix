@@ -1,0 +1,85 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    // A função admin precisa ser atribuída fora do cliente, por ambiente confiável.
+    function isAdmin() {
+      return signedIn() && request.auth.token.admin == true;
+    }
+
+    function ownsCompany(companyId) {
+      return signedIn()
+        && get(/databases/$(database)/documents/companies/$(companyId)).data.ownerUid == request.auth.uid;
+    }
+
+    match /profiles/{userId} {
+      allow read: if signedIn() && (request.auth.uid == userId || isAdmin());
+      allow create: if signedIn()
+        && request.auth.uid == userId
+        && request.resource.data.uid == userId
+        && request.resource.data.role == 'customer';
+      allow update: if signedIn()
+        && request.auth.uid == userId
+        && request.resource.data.uid == resource.data.uid
+        && request.resource.data.role == resource.data.role;
+      allow delete: if isAdmin();
+    }
+
+    match /companies/{companyId} {
+      allow read: if resource.data.status == 'approved' || isAdmin()
+        || (signedIn() && resource.data.ownerUid == request.auth.uid);
+      allow create: if signedIn()
+        && request.resource.data.ownerUid == request.auth.uid
+        && request.resource.data.status == 'pending';
+      allow update: if isAdmin()
+        || (signedIn()
+          && resource.data.ownerUid == request.auth.uid
+          && request.resource.data.ownerUid == resource.data.ownerUid
+          && request.resource.data.status == resource.data.status);
+      allow delete: if isAdmin();
+    }
+
+    match /products/{productId} {
+      allow read: if resource.data.status == 'active' || isAdmin()
+        || (signedIn() && ownsCompany(resource.data.companyId));
+      allow create: if signedIn()
+        && ownsCompany(request.resource.data.companyId)
+        && request.resource.data.status == 'pending';
+      allow update: if isAdmin()
+        || (signedIn()
+          && ownsCompany(resource.data.companyId)
+          && request.resource.data.companyId == resource.data.companyId
+          && request.resource.data.status == resource.data.status);
+      allow delete: if isAdmin()
+        || (signedIn() && ownsCompany(resource.data.companyId));
+    }
+
+    match /ads/{adId} {
+      allow read: if resource.data.status == 'published' || isAdmin()
+        || (signedIn() && ownsCompany(resource.data.companyId));
+      allow create: if signedIn()
+        && ownsCompany(request.resource.data.companyId)
+        && request.resource.data.status == 'pending';
+      allow update: if isAdmin()
+        || (signedIn()
+          && ownsCompany(resource.data.companyId)
+          && request.resource.data.companyId == resource.data.companyId
+          && request.resource.data.status == resource.data.status);
+      allow delete: if isAdmin()
+        || (signedIn() && ownsCompany(resource.data.companyId));
+    }
+
+    match /notifications/{notificationId} {
+      allow read, update, delete: if signedIn()
+        && resource.data.userId == request.auth.uid;
+      allow create: if isAdmin();
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
