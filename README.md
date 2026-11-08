@@ -17,9 +17,16 @@ A área de comércio e empresas deverá permitir que cada estabelecimento escolh
 - **Vagas de emprego:** cargo, descrição da função, requisitos, horário/local de trabalho e forma de contato para candidatura.
 - **Hotéis, pousadas e hospedagem:** anúncio de quartos e acomodações, fotos, descrição, comodidades, endereço, contato e valor da diária.
 - **Diárias e tarifas:** preço por diária, tipo de quarto ou acomodação, período de validade da tarifa e eventuais condições.
+- **Aluguel residencial:** casas e kitnets para locação, anunciadas por proprietários ou imobiliárias, com fotos, endereço ou região, descrição, quantidade de quartos, banheiros, vagas, mobília, valor do aluguel, taxas, garantias e condições informadas pelo anunciante.
 - **Serviços, eventos, imóveis, veículos e comunicados:** campos adequados ao tipo de publicação.
 
 Os anúncios devem ficar organizados por categoria, com busca e filtros para o cliente encontrar o que procura. Cada anúncio deve identificar claramente a empresa responsável e oferecer contato por telefone/WhatsApp.
+
+## Aluguel de casas e kitnets
+- Pessoas físicas proprietárias e imobiliárias poderão anunciar casas e kitnets para aluguel, separadamente da área de hospedagem por diária.
+- O anúncio poderá informar fotos, descrição, endereço ou região, quantidade de quartos e banheiros, vagas, se é mobiliado, valor mensal do aluguel, taxas adicionais, garantias exigidas, regras e contato.
+- O interessado poderá consultar os detalhes, ver a localização quando disponibilizada e falar diretamente com o anunciante por telefone/WhatsApp para combinar visita, documentação, contrato e pagamento.
+- Nesta primeira versão, o SinopMix divulgará os imóveis e facilitará o contato; não fará análise cadastral, assinatura de contrato, cobrança de aluguel, caução ou intermediação financeira. A disponibilidade e as condições devem ser confirmadas com o anunciante.
 
 ## Reservas de hotéis e pousadas pelo aplicativo — sem pagamento pelo SinopMix
 O SinopMix será usado para consultar disponibilidade e reservar o quarto diretamente com o hotel ou pousada. **O aplicativo não receberá nem processará o pagamento da hospedagem. O cliente pagará diretamente ao estabelecimento, conforme as condições informadas pelo hotel.**
@@ -55,6 +62,7 @@ Ao abrir o anúncio ou perfil de uma empresa, o cliente deverá encontrar em uma
 - Promoções e ofertas publicadas pela própria empresa.
 - Vagas de emprego e informações para candidatura, quando publicadas.
 - Para hotéis e pousadas: acomodações, fotos, comodidades, tarifas por diária, disponibilidade e opção de solicitar reserva pelo aplicativo, sem pagamento pelo SinopMix.
+- Para casas e kitnets: anúncios de aluguel residencial com fotos, características, valor mensal, condições e contato direto com o proprietário ou imobiliária.
 - Mapa incorporado com marcador mostrando a localização daquele estabelecimento.
 - Botão **“Ver localização / Como chegar”** para abrir o ponto em um aplicativo de mapas.
 - Se a empresa possuir mais de uma unidade, mostrar cada unidade separadamente, com endereço e marcador próprios, permitindo ao cliente escolher qual deseja visitar.
@@ -85,7 +93,7 @@ O cliente deve conseguir ver produtos, promoções, vagas, diárias, contato e l
 
 ## Modelo de acesso previsto
 - Cliente: autenticação por telefone/SMS, perfil próprio, leitura de conteúdo público aprovado e gestão das próprias reservas.
-- Empresa: gerencia apenas o próprio cadastro, unidades, quartos, disponibilidade, reservas recebidas, produtos e anúncios; não pode aprovar a própria empresa nem alterar o estado de pagamento.
+- Empresa: gerencia apenas o próprio cadastro, unidades, quartos, disponibilidade, reservas recebidas, produtos, anúncios e imóveis para locação; não pode aprovar a própria empresa nem alterar o estado de pagamento.
 - Administrador: aprova/reprova empresas, modera anúncios e administra assinaturas por ambiente confiável.
 - O status de pagamento da assinatura comercial deve ser atualizado por integração confiável, nunca por um botão ou campo controlado pelo navegador do cliente.
 - Preferências de notificações devem ser salvas por cliente e respeitadas pelo serviço de envio.
