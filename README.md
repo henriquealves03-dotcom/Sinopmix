@@ -1,14 +1,25 @@
 # SinopMix
-Marketplace local de Sinop – MT. Plataforma para aproximar clientes, empresas, lojas e prestadores de serviços.
+Marketplace local de Sinop – MT. Plataforma para aproximar clientes, empresas, lojas, hotéis e prestadores de serviços.
 
 ## Regras comerciais e de administração definidas
 - O cadastro da empresa deve solicitar somente: nome da empresa, endereço completo, nome da pessoa de contato e telefone/WhatsApp.
 - Toda empresa cadastrada fica com status **pendente** até aprovação manual do administrador do SinopMix.
 - A assinatura comercial planejada custa **R$ 49,90 por mês por empresa**.
 - A empresa só poderá publicar/divulgar depois de cumprir as duas condições: aprovação do administrador e mensalidade confirmada como ativa.
-- Com a assinatura ativa, a empresa poderá divulgar diferentes tipos de conteúdo no SinopMix: produtos, promoções, serviços, vagas de emprego, eventos, comunicados, imóveis, veículos e outras ofertas permitidas pelas regras da plataforma.
+- Com a assinatura ativa, a empresa poderá divulgar diferentes tipos de conteúdo no SinopMix: produtos à venda, promoções, ofertas, serviços, vagas de emprego, eventos, comunicados, imóveis, veículos, hospedagens e diárias de hotéis/pousadas, além de outras ofertas permitidas pelas regras da plataforma.
 - A aprovação da empresa e a confirmação da mensalidade são controles distintos. Pagar não aprova automaticamente uma empresa, e aprovação administrativa não substitui o pagamento.
 - Anúncios continuam sujeitos à moderação, às leis aplicáveis e às regras de conteúdo do SinopMix. Conteúdo enganoso, ilegal, fraudulento ou que viole direitos de terceiros deve ser recusado.
+
+## Categorias de anúncios para empresas e comércio
+A área de comércio e empresas deverá permitir que cada estabelecimento escolha o tipo de anúncio que deseja publicar:
+- **Produtos à venda:** nome do produto, descrição, preço e fotos, quando disponíveis.
+- **Promoções e ofertas:** produto ou serviço em promoção, preço/oferta, período de validade e condições.
+- **Vagas de emprego:** cargo, descrição da função, requisitos, horário/local de trabalho e forma de contato para candidatura.
+- **Hotéis, pousadas e hospedagem:** anúncio de quartos e acomodações, fotos, descrição, comodidades, endereço, contato e valor da diária.
+- **Diárias e tarifas:** preço por diária, tipo de quarto ou acomodação, período de validade da tarifa e eventuais condições. A disponibilidade deve ser confirmada diretamente com o estabelecimento; o anúncio não representa reserva confirmada.
+- **Serviços, eventos, imóveis, veículos e comunicados:** campos adequados ao tipo de publicação.
+
+Os anúncios devem ficar organizados por categoria, com busca e filtros para o cliente encontrar o que procura. Cada anúncio deve identificar claramente a empresa responsável e oferecer contato por telefone/WhatsApp.
 
 ## Acesso do cliente
 - O cadastro e o login do cliente devem solicitar somente número de celular e código de verificação enviado por SMS.
@@ -25,11 +36,13 @@ Ao abrir o anúncio ou perfil de uma empresa, o cliente deverá encontrar em uma
 - Endereço completo do estabelecimento.
 - Lista de produtos disponíveis para venda e respectivas informações/preços, quando fornecidos.
 - Promoções e ofertas publicadas pela própria empresa.
+- Vagas de emprego e informações para candidatura, quando publicadas.
+- Para hotéis e pousadas: acomodações, fotos, comodidades, tarifas por diária e condições informadas pelo estabelecimento.
 - Mapa incorporado com marcador mostrando a localização daquele estabelecimento.
 - Botão **“Ver localização / Como chegar”** para abrir o ponto em um aplicativo de mapas.
 - Se a empresa possuir mais de uma unidade, mostrar cada unidade separadamente, com endereço e marcador próprios, permitindo ao cliente escolher qual deseja visitar.
 
-O cliente deve conseguir ver os produtos, as promoções, o contato e a localização sem precisar procurar essas informações em telas desconectadas.
+O cliente deve conseguir ver produtos, promoções, vagas, diárias, contato e localização sem precisar procurar essas informações em telas desconectadas.
 
 ## Localização dos estabelecimentos no mapa
 - Cada página de empresa/estabelecimento deve exibir um mapa com um marcador na localização correspondente ao endereço cadastrado.
