@@ -10,21 +10,31 @@ Marketplace local de Sinop – MT. Plataforma demonstrativa para aproximar clien
 - Prévia de espaços para imagem e vídeo.
 - Área de publicações e controle visual de notificações.
 
+## Preparação do Firebase (projeto exclusivo SinopMix)
+1. Crie um projeto Firebase novo chamado **SinopMix**. Não reutilize projetos de outros aplicativos.
+2. No console Firebase, registre um aplicativo Web e copie as configurações para um arquivo local `.env`, usando `.env.example` como modelo.
+3. Ative Authentication (e-mail/senha) e crie o Cloud Firestore.
+4. Publique as regras de segurança de `firestore.rules` no Firestore Rules.
+5. Instale dependências com `npm install` e execute `npm run dev`.
+
+## Variáveis de ambiente
+Veja `.env.example`. Nunca coloque chaves privadas, service account, tokens administrativos ou segredos no frontend. A configuração web do Firebase pode ser pública; a proteção real depende de Authentication, Security Rules e App Check.
+
+## Modelo de acesso previsto
+- Cliente: perfil próprio e leitura de conteúdo público aprovado.
+- Empresa: gerencia apenas o próprio cadastro, produtos e rascunhos/anúncios pendentes.
+- Administrador: aprovação e moderação por custom claim `admin: true`, definida somente em ambiente confiável pelo proprietário do projeto.
+
+## Limitações atuais
+Esta versão ainda é uma demonstração front-end. A tela não está conectada ao Firebase; cadastros e anúncios são mantidos apenas na memória e desaparecem ao recarregar. Não há autenticação funcional, proteção ativa do painel, pedidos reais, pagamentos, upload de mídia, geração real de imagem/vídeo por IA, publicação automática ou notificações push.
+
+A próxima integração no código deverá ligar telas e formulários às funções Firebase, implementar login/recuperação de senha, validação, armazenamento de mídia, pedidos e notificações. A IA de mídia e os envios push poderão gerar custos e só devem ser habilitados após escolha e autorização explícita.
+
 ## Rodar localmente
 1. Instale Node.js LTS.
 2. Clone este repositório.
 3. Execute `npm install`.
-4. Execute `npm run dev`.
-
-## Limitações importantes desta versão
-Esta é uma demonstração front-end. Cadastros e anúncios são mantidos apenas na memória da página e desaparecem ao recarregar. Não há autenticação ou proteção real do painel administrativo, banco de dados, upload de mídia, geração real de imagem/vídeo por IA, publicação automática em redes sociais, nem envio real de notificações push.
-
-Para produção, as próximas integrações necessárias são:
-1. Backend e banco de dados com regras de acesso por função (administrador, empresa e cliente).
-2. Login seguro, verificação de empresas e trilha de auditoria.
-3. Serviço de IA para geração de texto e mídia, com limites e aprovação humana.
-4. Armazenamento de imagens/vídeos e fila de publicação.
-5. Notificações push com consentimento do cliente e preferências por categoria.
-6. Moderação, denúncias, validade dos anúncios e controles antifraude.
+4. Copie `.env.example` para `.env` e preencha os dados do app web Firebase.
+5. Execute `npm run dev`.
 
 **Segurança:** não cadastrar credenciais, senhas ou tokens diretamente no código-fonte.
