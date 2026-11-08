@@ -77,6 +77,15 @@ Ao abrir o anúncio ou perfil de uma empresa, o cliente deverá encontrar em uma
 
 O cliente deve conseguir ver produtos, promoções, vagas, diárias, contato e localização sem precisar procurar essas informações em telas desconectadas.
 
+## Iniciar trajeto até o estabelecimento
+- Nas páginas e anúncios de estabelecimentos, hotéis, pousadas e demais locais com endereço válido, exibir a ação **“Iniciar trajeto”**.
+- Ao tocar nessa ação, o aplicativo solicita permissão de localização ao cliente e, com autorização, obtém a posição atual do dispositivo para usar como ponto de partida.
+- O endereço geocodificado do estabelecimento ou da unidade selecionada será o destino. O aplicativo abre a navegação em um serviço de mapas compatível, com origem na localização atual do cliente e destino no endereço correto do estabelecimento.
+- Quando uma empresa tiver várias filiais, o trajeto deve usar exatamente a unidade escolhida pelo cliente, não a localização genérica da empresa.
+- Se o cliente negar a permissão de localização ou o GPS estiver indisponível, permitir informar a origem manualmente ou abrir o mapa com o destino para que o cliente escolha a origem.
+- Antes de iniciar, mostrar claramente o nome e endereço do destino para o cliente conferir. Não inventar coordenadas nem iniciar rota para um endereço que não foi geocodificado com confiança.
+- A localização do cliente só será acessada após sua autorização e usada para calcular/abrir o trajeto; não deve ser publicada no perfil nem compartilhada com o estabelecimento sem necessidade e consentimento.
+
 ## Localização dos estabelecimentos no mapa
 - Cada página de empresa/estabelecimento deve exibir um mapa com um marcador na localização correspondente ao endereço cadastrado.
 - O endereço será convertido em coordenadas por um serviço de geocodificação; se não puder ser localizado com confiança, mostrar o endereço textual e permitir correção, sem inventar um ponto no mapa.
