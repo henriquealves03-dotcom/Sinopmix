@@ -93,6 +93,8 @@ O cliente deve conseguir ver produtos, promoções, vagas, diárias, contato e l
 
 ## Recursos de interface implementados
 - Catálogo demonstrativo de produtos, categorias, busca e carrinho local.
+- Filtros do mural ampliados para produtos, promoções, vagas, serviços, hotéis/pousadas, casas/kitnets, eventos, comunicados e veículos.
+- Quadro de preços visível: comércio/empresas a R$ 49,90 por mês e anúncios de casas/kitnets a R$ 19,90 por 60 dias.
 - Mural de anúncios com filtros: promoções, vagas, serviços, eventos, comunicados, imóveis e veículos.
 - Painel administrativo demonstrativo.
 - Cadastro temporário de empresas no estado da tela.
@@ -120,7 +122,7 @@ O cliente deve conseguir ver produtos, promoções, vagas, diárias, contato e l
 A assinatura comercial para comércio, lojas, hotéis, pousadas e demais empresas permanece em R$ 49,90/mês por empresa. Os anúncios de casas e kitnets têm tarifa separada de R$ 19,90 por imóvel a cada 60 dias. **Nenhum gateway de pagamento foi conectado e nenhuma cobrança está ativa.** A assinatura do comerciante é independente da hospedagem: o SinopMix não processará pagamentos de diárias, reservas, sinais ou taxas dos hóspedes. O pagamento da hospedagem será tratado diretamente entre o cliente e o hotel/pousada, fora do aplicativo. Não ativar serviços pagos nem gerar cobranças sem autorização explícita.
 
 ## Limitações atuais
-Esta versão ainda é uma demonstração front-end. A tela não está conectada ao Firebase; cadastros e anúncios são mantidos apenas na memória e desaparecem ao recarregar. Não há autenticação funcional, proteção ativa do painel, aprovação real, verificação de assinatura, pagamentos, página dinâmica de empresa, mapa dinâmico por endereço, geocodificação, upload de mídia, geração real de imagem/vídeo por IA, publicação automática, notificações push ou sistema funcional de reservas e disponibilidade de quartos.
+Esta versão ainda é uma demonstração front-end. A tela não está conectada ao Firebase; cadastros e anúncios são mantidos apenas na memória e desaparecem ao recarregar. Não há autenticação funcional, proteção ativa do painel, aprovação real, verificação de assinatura, pagamentos, página dinâmica de empresa, mapa dinâmico por endereço, geocodificação, navegação GPS integrada, upload de mídia, geração real de imagem/vídeo por IA, publicação automática, notificações push ou sistema funcional de reservas e disponibilidade de quartos. Os preços exibidos na interface são informativos; a cobrança e a ativação de anúncios ainda não estão conectadas.
 
 ## Variáveis de ambiente
 Veja `.env.example`. Nunca coloque chaves privadas, service account, tokens administrativos ou segredos no frontend. A configuração web do Firebase pode ser pública; a proteção real depende de Authentication, Security Rules e App Check.
