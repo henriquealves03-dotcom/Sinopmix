@@ -22,6 +22,13 @@ A área de comércio e empresas deverá permitir que cada estabelecimento escolh
 
 Os anúncios devem ficar organizados por categoria, com busca e filtros para o cliente encontrar o que procura. Cada anúncio deve identificar claramente a empresa responsável e oferecer contato por telefone/WhatsApp.
 
+## Modelo de remuneração para anúncios de aluguel residencial — pendente de validação
+- A intenção comercial é não cobrar o proprietário antecipadamente pelo anúncio de casa ou kitnet e avaliar uma cobrança somente quando a locação for concluída.
+- **Não ativar comissão, taxa de sucesso ou cobrança condicionada ao fechamento do aluguel antes de análise jurídica e regulatória.** A intermediação de locações é atividade regulada pela Lei nº 6.530/1978; o enquadramento depende das atividades efetivamente prestadas pelo SinopMix.
+- O modelo mais prudente para a fase inicial é atuar como mural de anúncios e canal de contato direto, sem negociar condições, selecionar inquilinos, intermediar propostas, elaborar contratos ou receber valores de aluguel.
+- Se for mantida uma remuneração vinculada à locação concluída, avaliar parceria formal com corretor/imobiliária regularmente inscritos no CRECI e obter orientação jurídica sobre responsabilidades, contrato, cobrança e divulgação.
+- Nenhum valor, percentual, método de cobrança ou obrigação financeira do proprietário está definido ou autorizado neste momento. Não gerar cobranças até aprovação expressa do responsável pelo projeto e validação jurídica.
+
 ## Aluguel de casas e kitnets
 - Pessoas físicas proprietárias e imobiliárias poderão anunciar casas e kitnets para aluguel, separadamente da área de hospedagem por diária.
 - O anúncio poderá informar fotos, descrição, endereço ou região, quantidade de quartos e banheiros, vagas, se é mobiliado, valor mensal do aluguel, taxas adicionais, garantias exigidas, regras e contato.
