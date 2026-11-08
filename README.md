@@ -10,6 +10,14 @@ Marketplace local de Sinop – MT. Plataforma para aproximar clientes, empresas,
 - A aprovação da empresa e a confirmação da mensalidade são controles distintos. Pagar não aprova automaticamente uma empresa, e aprovação administrativa não substitui o pagamento.
 - Anúncios continuam sujeitos à moderação, às leis aplicáveis e às regras de conteúdo do SinopMix. Conteúdo enganoso, ilegal, fraudulento ou que viole direitos de terceiros deve ser recusado.
 
+## Localização dos estabelecimentos no mapa
+- Cada página de empresa/estabelecimento deve exibir um mapa com um marcador na localização correspondente ao endereço cadastrado.
+- O cliente poderá abrir o mapa ao entrar na página de uma empresa para identificar onde ela fica em Sinop – MT.
+- Deve existir uma ação para abrir a localização em um aplicativo de mapas e consultar como chegar.
+- O endereço será convertido em coordenadas por um serviço de geocodificação; se o endereço não puder ser localizado com confiança, mostrar o endereço textual e permitir correção, sem inventar um ponto no mapa.
+- Empresas com mais de uma unidade devem cadastrar cada endereço como uma unidade separada, com seu próprio marcador no mapa.
+- O cadastro continua solicitando somente nome da empresa, endereço completo, nome da pessoa de contato e telefone/WhatsApp; coordenadas são obtidas pelo sistema a partir do endereço, sem pedir latitude/longitude à empresa.
+
 ## Recursos de interface implementados
 - Catálogo demonstrativo de produtos, categorias, busca e carrinho local.
 - Mural de anúncios com filtros: promoções, vagas, serviços, eventos, comunicados, imóveis e veículos.
@@ -36,16 +44,15 @@ Marketplace local de Sinop – MT. Plataforma para aproximar clientes, empresas,
 O preço comercial planejado é R$ 49,90/mês por empresa. **Nenhum gateway de pagamento foi conectado e nenhuma cobrança está ativa.** Antes de integrar, será necessário escolher o provedor, definir como a renovação/cancelamento funcionará e conferir as tarifas do provedor. Não ativar serviços pagos nem gerar cobranças sem autorização explícita.
 
 ## Limitações atuais
-Esta versão ainda é uma demonstração front-end. A tela não está conectada ao Firebase; cadastros e anúncios são mantidos apenas na memória e desaparecem ao recarregar. Não há autenticação funcional, proteção ativa do painel, aprovação real, verificação de assinatura, pagamentos, upload de mídia, geração real de imagem/vídeo por IA, publicação automática ou notificações push.
+Esta versão ainda é uma demonstração front-end. A tela não está conectada ao Firebase; cadastros e anúncios são mantidos apenas na memória e desaparecem ao recarregar. Não há autenticação funcional, proteção ativa do painel, aprovação real, verificação de assinatura, pagamentos, mapa dinâmico por endereço, geocodificação, upload de mídia, geração real de imagem/vídeo por IA, publicação automática ou notificações push.
 
 ## Variáveis de ambiente
 Veja `.env.example`. Nunca coloque chaves privadas, service account, tokens administrativos ou segredos no frontend. A configuração web do Firebase pode ser pública; a proteção real depende de Authentication, Security Rules e App Check.
 
 ## Rodar localmente
 1. Instale Node.js LTS.
-2. Clone este repositório.
-3. Execute `npm install`.
-4. Copie `.env.example` para `.env` e preencha os dados do app web Firebase.
-5. Execute `npm run dev`.
+2. Execute `npm install`.
+3. Copie `.env.example` para `.env` e preencha os dados do app web Firebase.
+4. Execute `npm run dev`.
 
 **Segurança:** não cadastrar credenciais, senhas ou tokens diretamente no código-fonte.
