@@ -42,3 +42,16 @@
 .toggle-line{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid #edf1f4;font-size:13px;font-weight:700;color:#29445b}
 .toggle-line span{display:flex;align-items:center;gap:8px}.toggle-line svg{color:#15994a}
 @media(max-width:650px){.admin-heading{align-items:flex-start;flex-direction:column}.admin-stats{grid-template-columns:1fr}.admin-shortcuts{grid-template-columns:1fr}.company-list>div{flex-direction:column}.company-list small{text-align:left}.media-pending{grid-template-columns:1fr}.admin-panel{padding:15px}}
+
+
+/* Planos de divulgação do SinopMix */
+.pricing-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:18px 0 8px}
+.pricing-card{background:#fff;border:1px solid #dfe9ee;border-radius:16px;padding:19px;display:flex;flex-direction:column;gap:7px;box-shadow:0 5px 18px #19364d08}
+.pricing-card strong{font:800 28px Manrope;color:#0b8743;margin-top:3px}
+.pricing-card>b{font-size:12px;color:#38536a}
+.pricing-card p{font-size:12px;line-height:1.55;color:#718394;margin:3px 0 0}
+.property-price{border-color:#c8dfd0;background:#fbfefc}
+.ad-price-note{display:grid;gap:5px;padding:13px;border-radius:11px;background:#f0f8f3;border:1px solid #d7eadf;color:#28533a}
+.ad-price-note b{font-size:13px;color:#087d3c}
+.ad-price-note span{font-size:11px;line-height:1.45;color:#61766a}
+@media(max-width:650px){.pricing-grid{grid-template-columns:1fr}.pricing-card{padding:16px}}
