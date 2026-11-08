@@ -16,16 +16,32 @@ A área de comércio e empresas deverá permitir que cada estabelecimento escolh
 - **Promoções e ofertas:** produto ou serviço em promoção, preço/oferta, período de validade e condições.
 - **Vagas de emprego:** cargo, descrição da função, requisitos, horário/local de trabalho e forma de contato para candidatura.
 - **Hotéis, pousadas e hospedagem:** anúncio de quartos e acomodações, fotos, descrição, comodidades, endereço, contato e valor da diária.
-- **Diárias e tarifas:** preço por diária, tipo de quarto ou acomodação, período de validade da tarifa e eventuais condições. A disponibilidade deve ser confirmada diretamente com o estabelecimento; o anúncio não representa reserva confirmada.
+- **Diárias e tarifas:** preço por diária, tipo de quarto ou acomodação, período de validade da tarifa e eventuais condições.
 - **Serviços, eventos, imóveis, veículos e comunicados:** campos adequados ao tipo de publicação.
 
 Os anúncios devem ficar organizados por categoria, com busca e filtros para o cliente encontrar o que procura. Cada anúncio deve identificar claramente a empresa responsável e oferecer contato por telefone/WhatsApp.
+
+## Reservas de hotéis e pousadas pelo aplicativo
+O SinopMix deverá permitir que o cliente consulte a disponibilidade e faça uma reserva diretamente no aplicativo, sem precisar concluir todo o processo pelo WhatsApp:
+- O cliente escolhe o hotel ou pousada, o tipo/quarto disponível, a data de entrada (check-in), a data de saída (check-out) e a quantidade de hóspedes.
+- O aplicativo apresenta o preço total estimado da estadia, a tarifa por diária e as condições informadas pelo estabelecimento antes da confirmação.
+- O cliente envia a solicitação e recebe uma confirmação dentro do aplicativo somente depois que o sistema registrar a reserva com sucesso e garantir a disponibilidade do quarto.
+- A reserva confirmada aparece em **“Minhas reservas”**, com nome do hotel, endereço, datas, tipo de quarto, quantidade de hóspedes, situação e um código/QR de reserva.
+- Ao chegar ao hotel, o cliente poderá abrir a reserva no aplicativo e apresentar o código/QR ao atendente. O estabelecimento confere a reserva no painel próprio e registra a chegada/check-in.
+- O comerciante poderá cadastrar os quartos e acomodações, com identificação ou categoria, capacidade de hóspedes, descrição, fotos, comodidades, tarifa e calendário de disponibilidade.
+- O comerciante poderá informar quantas unidades de cada categoria possui e bloquear datas ou quartos indisponíveis, ocupados ou em manutenção.
+- O sistema deverá atualizar a disponibilidade após cada reserva confirmada e impedir reservas simultâneas do mesmo quarto para datas que se sobreponham (prevenção de overbooking).
+- O hotel terá um painel para consultar reservas, confirmar ou administrar solicitações conforme a política definida, marcar check-in e check-out e atualizar a disponibilidade.
+- O cliente poderá consultar o estado da reserva e receber notificações sobre confirmação, alterações ou cancelamento.
+- As regras de cancelamento, pagamento, sinal/garantia e reembolso deverão ser informadas claramente antes de reservar. Nenhuma cobrança será ativada até que o meio de pagamento e as regras sejam definidos e autorizados.
+
+**Regra de confirmação:** uma solicitação enviada não deve aparecer como reserva confirmada. A confirmação só será exibida depois da validação da disponibilidade e gravação segura da reserva no backend. A operação deve ser transacional para evitar que duas pessoas reservem a última unidade ao mesmo tempo.
 
 ## Acesso do cliente
 - O cadastro e o login do cliente devem solicitar somente número de celular e código de verificação enviado por SMS.
 - A autenticação será feita pelo Firebase Authentication com telefone (OTP/SMS). O cliente não precisará criar nem memorizar uma senha.
 - O código SMS deve ser validado pelo Firebase; nunca armazenar códigos de verificação ou senhas em texto puro no banco de dados.
-- Depois de entrar, o cliente poderá consultar anúncios, acompanhar empresas, receber avisos de promoções e configurar suas preferências de notificações.
+- Depois de entrar, o cliente poderá consultar anúncios, acompanhar empresas, receber avisos de promoções, consultar suas reservas e configurar suas preferências de notificações.
 - A permissão para notificações deve ser solicitada de forma clara e opcional. O cliente poderá ativar ou desativar notificações e escolher os tipos de avisos que deseja receber.
 - O envio real de notificações ainda dependerá da configuração do Firebase Cloud Messaging e de lógica de backend confiável.
 
@@ -37,7 +53,7 @@ Ao abrir o anúncio ou perfil de uma empresa, o cliente deverá encontrar em uma
 - Lista de produtos disponíveis para venda e respectivas informações/preços, quando fornecidos.
 - Promoções e ofertas publicadas pela própria empresa.
 - Vagas de emprego e informações para candidatura, quando publicadas.
-- Para hotéis e pousadas: acomodações, fotos, comodidades, tarifas por diária e condições informadas pelo estabelecimento.
+- Para hotéis e pousadas: acomodações, fotos, comodidades, tarifas por diária, disponibilidade e opção de reservar pelo aplicativo.
 - Mapa incorporado com marcador mostrando a localização daquele estabelecimento.
 - Botão **“Ver localização / Como chegar”** para abrir o ponto em um aplicativo de mapas.
 - Se a empresa possuir mais de uma unidade, mostrar cada unidade separadamente, com endereço e marcador próprios, permitindo ao cliente escolher qual deseja visitar.
@@ -67,17 +83,18 @@ O cliente deve conseguir ver produtos, promoções, vagas, diárias, contato e l
 6. Instale dependências com `npm install` e execute `npm run dev`.
 
 ## Modelo de acesso previsto
-- Cliente: autenticação por telefone/SMS, perfil próprio e leitura de conteúdo público aprovado.
-- Empresa: gerencia apenas o próprio cadastro, produtos e anúncios; não pode aprovar a própria empresa nem alterar o estado de pagamento.
+- Cliente: autenticação por telefone/SMS, perfil próprio, leitura de conteúdo público aprovado e gestão das próprias reservas.
+- Empresa: gerencia apenas o próprio cadastro, unidades, quartos, disponibilidade, reservas recebidas, produtos e anúncios; não pode aprovar a própria empresa nem alterar o estado de pagamento.
 - Administrador: aprova/reprova empresas, modera anúncios e administra assinaturas por ambiente confiável.
 - O status de pagamento deve ser atualizado por integração de pagamento/webhook confiável, nunca por um botão ou campo controlado pelo navegador do cliente.
 - Preferências de notificações devem ser salvas por cliente e respeitadas pelo serviço de envio.
+- A criação, alteração de disponibilidade e confirmação de reservas devem ser validadas no backend com transações e regras de acesso para impedir duplicidade, alteração indevida ou acesso aos dados de outros clientes.
 
 ## Pagamento e custos
-O preço comercial planejado é R$ 49,90/mês por empresa. **Nenhum gateway de pagamento foi conectado e nenhuma cobrança está ativa.** Antes de integrar, será necessário escolher o provedor, definir como a renovação/cancelamento funcionará e conferir as tarifas do provedor. Não ativar serviços pagos nem gerar cobranças sem autorização explícita.
+O preço comercial planejado é R$ 49,90/mês por empresa. **Nenhum gateway de pagamento foi conectado e nenhuma cobrança está ativa.** O pagamento da assinatura da empresa é separado do pagamento da hospedagem pelo cliente. Antes de integrar pagamentos de reservas, será necessário definir se o hotel recebe diretamente ou se o SinopMix processará o pagamento, além de definir tarifas, renovação, cancelamento e reembolso. Não ativar serviços pagos nem gerar cobranças sem autorização explícita.
 
 ## Limitações atuais
-Esta versão ainda é uma demonstração front-end. A tela não está conectada ao Firebase; cadastros e anúncios são mantidos apenas na memória e desaparecem ao recarregar. Não há autenticação funcional, proteção ativa do painel, aprovação real, verificação de assinatura, pagamentos, página dinâmica de empresa, mapa dinâmico por endereço, geocodificação, upload de mídia, geração real de imagem/vídeo por IA, publicação automática ou notificações push.
+Esta versão ainda é uma demonstração front-end. A tela não está conectada ao Firebase; cadastros e anúncios são mantidos apenas na memória e desaparecem ao recarregar. Não há autenticação funcional, proteção ativa do painel, aprovação real, verificação de assinatura, pagamentos, página dinâmica de empresa, mapa dinâmico por endereço, geocodificação, upload de mídia, geração real de imagem/vídeo por IA, publicação automática, notificações push ou sistema funcional de reservas e disponibilidade de quartos.
 
 ## Variáveis de ambiente
 Veja `.env.example`. Nunca coloque chaves privadas, service account, tokens administrativos ou segredos no frontend. A configuração web do Firebase pode ser pública; a proteção real depende de Authentication, Security Rules e App Check.
