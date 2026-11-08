@@ -4,7 +4,7 @@ Marketplace local de Sinop – MT. Plataforma para aproximar clientes, empresas,
 ## Regras comerciais e de administração definidas
 - O cadastro da empresa deve solicitar somente: nome da empresa, endereço completo, nome da pessoa de contato e telefone/WhatsApp.
 - Toda empresa cadastrada fica com status **pendente** até aprovação manual do administrador do SinopMix.
-- A assinatura comercial planejada custa **R$ 49,90 por mês por empresa**.
+- Para comércio, lojas, hotéis, pousadas e demais empresas, a assinatura comercial permanece em **R$ 49,90 por mês por empresa**. Essa regra não será alterada pela tarifa especial de anúncios de casas e kitnets.
 - A empresa só poderá publicar/divulgar depois de cumprir as duas condições: aprovação do administrador e mensalidade confirmada como ativa.
 - Com a assinatura ativa, a empresa poderá divulgar diferentes tipos de conteúdo no SinopMix: produtos à venda, promoções, ofertas, serviços, vagas de emprego, eventos, comunicados, imóveis, veículos, hospedagens e diárias de hotéis/pousadas, além de outras ofertas permitidas pelas regras da plataforma.
 - A aprovação da empresa e a confirmação da mensalidade são controles distintos. Pagar não aprova automaticamente uma empresa, e aprovação administrativa não substitui o pagamento.
@@ -27,7 +27,7 @@ Os anúncios devem ficar organizados por categoria, com busca e filtros para o c
 - Essa cobrança remunera somente a divulgação do imóvel na plataforma. **Não é comissão sobre o aluguel, não é percentual do contrato e não depende de o proprietário conseguir alugar o imóvel.**
 - **Preço definido: R$ 19,90 por anúncio a cada 2 meses (60 dias) de divulgação.** O proprietário paga pelo período de divulgação, independentemente de conseguir alugar o imóvel nesse intervalo. Ao fim dos 60 dias, poderá renovar por mais 60 dias mediante novo pagamento.
 - O SinopMix não recebe aluguel, caução, depósito, sinal ou qualquer pagamento da locação. O interessado negocia e paga diretamente ao proprietário, fora do aplicativo.
-- A cobrança de anúncio imobiliário será separada da mensalidade comercial de R$ 49,90 e das reservas de hotéis/pousadas.
+- A cobrança de casas e kitnets é uma modalidade separada: **R$ 19,90 por imóvel a cada 60 dias**. Ela não altera nem substitui a mensalidade comercial de **R$ 49,90 por mês**, que continua valendo para as demais divulgações de comércio, lojas, hotéis, pousadas e empresas.
 - O anúncio deve exibir claramente a data de início e de término do período de 60 dias, além da opção de renovação. Não cobrar automaticamente uma renovação sem autorização do proprietário.
 
 ## Aluguel de casas e kitnets
@@ -117,7 +117,7 @@ O cliente deve conseguir ver produtos, promoções, vagas, diárias, contato e l
 - A criação, alteração de disponibilidade e confirmação de reservas devem ser validadas no backend com transações e regras de acesso para impedir duplicidade, alteração indevida ou acesso aos dados de outros clientes.
 
 ## Pagamento e custos
-A assinatura comercial planejada é R$ 49,90/mês por empresa. **Nenhum gateway de pagamento foi conectado e nenhuma cobrança está ativa.** A assinatura do comerciante é independente da hospedagem: o SinopMix não processará pagamentos de diárias, reservas, sinais ou taxas dos hóspedes. O pagamento da hospedagem será tratado diretamente entre o cliente e o hotel/pousada, fora do aplicativo. Não ativar serviços pagos nem gerar cobranças sem autorização explícita.
+A assinatura comercial para comércio, lojas, hotéis, pousadas e demais empresas permanece em R$ 49,90/mês por empresa. Os anúncios de casas e kitnets têm tarifa separada de R$ 19,90 por imóvel a cada 60 dias. **Nenhum gateway de pagamento foi conectado e nenhuma cobrança está ativa.** A assinatura do comerciante é independente da hospedagem: o SinopMix não processará pagamentos de diárias, reservas, sinais ou taxas dos hóspedes. O pagamento da hospedagem será tratado diretamente entre o cliente e o hotel/pousada, fora do aplicativo. Não ativar serviços pagos nem gerar cobranças sem autorização explícita.
 
 ## Limitações atuais
 Esta versão ainda é uma demonstração front-end. A tela não está conectada ao Firebase; cadastros e anúncios são mantidos apenas na memória e desaparecem ao recarregar. Não há autenticação funcional, proteção ativa do painel, aprovação real, verificação de assinatura, pagamentos, página dinâmica de empresa, mapa dinâmico por endereço, geocodificação, upload de mídia, geração real de imagem/vídeo por IA, publicação automática, notificações push ou sistema funcional de reservas e disponibilidade de quartos.
