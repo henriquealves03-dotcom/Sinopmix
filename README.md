@@ -10,12 +10,22 @@ Marketplace local de Sinop – MT. Plataforma para aproximar clientes, empresas,
 - A aprovação da empresa e a confirmação da mensalidade são controles distintos. Pagar não aprova automaticamente uma empresa, e aprovação administrativa não substitui o pagamento.
 - Anúncios continuam sujeitos à moderação, às leis aplicáveis e às regras de conteúdo do SinopMix. Conteúdo enganoso, ilegal, fraudulento ou que viole direitos de terceiros deve ser recusado.
 
+## Página pública de cada empresa
+Ao abrir o anúncio ou perfil de uma empresa, o cliente deverá encontrar em uma única página:
+- Nome da empresa e informações de contato.
+- Botão para ligar ou iniciar conversa pelo WhatsApp usando o telefone cadastrado.
+- Endereço completo do estabelecimento.
+- Lista de produtos disponíveis para venda e respectivas informações/preços, quando fornecidos.
+- Promoções e ofertas publicadas pela própria empresa.
+- Mapa incorporado com marcador mostrando a localização daquele estabelecimento.
+- Botão **“Ver localização / Como chegar”** para abrir o ponto em um aplicativo de mapas.
+- Se a empresa possuir mais de uma unidade, mostrar cada unidade separadamente, com endereço e marcador próprios, permitindo ao cliente escolher qual deseja visitar.
+
+O cliente deve conseguir ver os produtos, as promoções, o contato e a localização sem precisar procurar essas informações em telas desconectadas.
+
 ## Localização dos estabelecimentos no mapa
 - Cada página de empresa/estabelecimento deve exibir um mapa com um marcador na localização correspondente ao endereço cadastrado.
-- O cliente poderá abrir o mapa ao entrar na página de uma empresa para identificar onde ela fica em Sinop – MT.
-- Deve existir uma ação para abrir a localização em um aplicativo de mapas e consultar como chegar.
-- O endereço será convertido em coordenadas por um serviço de geocodificação; se o endereço não puder ser localizado com confiança, mostrar o endereço textual e permitir correção, sem inventar um ponto no mapa.
-- Empresas com mais de uma unidade devem cadastrar cada endereço como uma unidade separada, com seu próprio marcador no mapa.
+- O endereço será convertido em coordenadas por um serviço de geocodificação; se não puder ser localizado com confiança, mostrar o endereço textual e permitir correção, sem inventar um ponto no mapa.
 - O cadastro continua solicitando somente nome da empresa, endereço completo, nome da pessoa de contato e telefone/WhatsApp; coordenadas são obtidas pelo sistema a partir do endereço, sem pedir latitude/longitude à empresa.
 
 ## Recursos de interface implementados
@@ -44,7 +54,7 @@ Marketplace local de Sinop – MT. Plataforma para aproximar clientes, empresas,
 O preço comercial planejado é R$ 49,90/mês por empresa. **Nenhum gateway de pagamento foi conectado e nenhuma cobrança está ativa.** Antes de integrar, será necessário escolher o provedor, definir como a renovação/cancelamento funcionará e conferir as tarifas do provedor. Não ativar serviços pagos nem gerar cobranças sem autorização explícita.
 
 ## Limitações atuais
-Esta versão ainda é uma demonstração front-end. A tela não está conectada ao Firebase; cadastros e anúncios são mantidos apenas na memória e desaparecem ao recarregar. Não há autenticação funcional, proteção ativa do painel, aprovação real, verificação de assinatura, pagamentos, mapa dinâmico por endereço, geocodificação, upload de mídia, geração real de imagem/vídeo por IA, publicação automática ou notificações push.
+Esta versão ainda é uma demonstração front-end. A tela não está conectada ao Firebase; cadastros e anúncios são mantidos apenas na memória e desaparecem ao recarregar. Não há autenticação funcional, proteção ativa do painel, aprovação real, verificação de assinatura, pagamentos, página dinâmica de empresa, mapa dinâmico por endereço, geocodificação, upload de mídia, geração real de imagem/vídeo por IA, publicação automática ou notificações push.
 
 ## Variáveis de ambiente
 Veja `.env.example`. Nunca coloque chaves privadas, service account, tokens administrativos ou segredos no frontend. A configuração web do Firebase pode ser pública; a proteção real depende de Authentication, Security Rules e App Check.
