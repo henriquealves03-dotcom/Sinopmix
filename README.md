@@ -10,6 +10,14 @@ Marketplace local de Sinop – MT. Plataforma para aproximar clientes, empresas,
 - A aprovação da empresa e a confirmação da mensalidade são controles distintos. Pagar não aprova automaticamente uma empresa, e aprovação administrativa não substitui o pagamento.
 - Anúncios continuam sujeitos à moderação, às leis aplicáveis e às regras de conteúdo do SinopMix. Conteúdo enganoso, ilegal, fraudulento ou que viole direitos de terceiros deve ser recusado.
 
+## Acesso do cliente
+- O cadastro e o login do cliente devem solicitar somente número de celular e código de verificação enviado por SMS.
+- A autenticação será feita pelo Firebase Authentication com telefone (OTP/SMS). O cliente não precisará criar nem memorizar uma senha.
+- O código SMS deve ser validado pelo Firebase; nunca armazenar códigos de verificação ou senhas em texto puro no banco de dados.
+- Depois de entrar, o cliente poderá consultar anúncios, acompanhar empresas, receber avisos de promoções e configurar suas preferências de notificações.
+- A permissão para notificações deve ser solicitada de forma clara e opcional. O cliente poderá ativar ou desativar notificações e escolher os tipos de avisos que deseja receber.
+- O envio real de notificações ainda dependerá da configuração do Firebase Cloud Messaging e de lógica de backend confiável.
+
 ## Página pública de cada empresa
 Ao abrir o anúncio ou perfil de uma empresa, o cliente deverá encontrar em uma única página:
 - Nome da empresa e informações de contato.
@@ -40,15 +48,17 @@ O cliente deve conseguir ver os produtos, as promoções, o contato e a localiza
 ## Preparação do Firebase (projeto exclusivo SinopMix)
 1. Use o projeto Firebase **SinopMix**. Não reutilize projetos de outros aplicativos.
 2. Registre um aplicativo Web e copie as configurações para um arquivo local `.env`, usando `.env.example` como modelo.
-3. Ative Authentication (e-mail/senha) e crie o Cloud Firestore.
-4. Publique as regras de segurança de `firestore.rules` no Firestore Rules.
-5. Instale dependências com `npm install` e execute `npm run dev`.
+3. Ative Firebase Authentication com o provedor **Telefone** (verificação por SMS) e crie o Cloud Firestore.
+4. Configure os domínios autorizados e as medidas antiabuso exigidas pelo Firebase Phone Auth; teste o fluxo de SMS antes de liberar aos clientes.
+5. Publique as regras de segurança de `firestore.rules` no Firestore Rules.
+6. Instale dependências com `npm install` e execute `npm run dev`.
 
 ## Modelo de acesso previsto
-- Cliente: perfil próprio e leitura de conteúdo público aprovado.
+- Cliente: autenticação por telefone/SMS, perfil próprio e leitura de conteúdo público aprovado.
 - Empresa: gerencia apenas o próprio cadastro, produtos e anúncios; não pode aprovar a própria empresa nem alterar o estado de pagamento.
 - Administrador: aprova/reprova empresas, modera anúncios e administra assinaturas por ambiente confiável.
 - O status de pagamento deve ser atualizado por integração de pagamento/webhook confiável, nunca por um botão ou campo controlado pelo navegador do cliente.
+- Preferências de notificações devem ser salvas por cliente e respeitadas pelo serviço de envio.
 
 ## Pagamento e custos
 O preço comercial planejado é R$ 49,90/mês por empresa. **Nenhum gateway de pagamento foi conectado e nenhuma cobrança está ativa.** Antes de integrar, será necessário escolher o provedor, definir como a renovação/cancelamento funcionará e conferir as tarifas do provedor. Não ativar serviços pagos nem gerar cobranças sem autorização explícita.
