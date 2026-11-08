@@ -1,72 +1,74 @@
 import React, { useMemo, useState } from 'react';
 import { createRoot } from 'react-dom/client';
-import { Search, ShoppingCart, MapPin, Heart, Store, Plus, Minus, X, Truck, ShieldCheck } from 'lucide-react';
+import { Search, ShoppingCart, MapPin, Heart, Store, Plus, Minus, X, Truck, ShieldCheck, BriefcaseBusiness, Wrench, CalendarDays, Megaphone, LayoutDashboard, Building2, Sparkles, Bell, Image, Video, Send, CheckCircle2, ClipboardList } from 'lucide-react';
 import './style.css';
 
-const categories = [
-  ['Todos','✨'],['Supermercado','🛒'],['Farmácia','💊'],['Restaurante','🍔'],
-  ['Moda','👕'],['Casa e decoração','🏠'],['Eletrônicos','📱'],['Automotivo','🚗'],['Pet shop','🐾']
+const categories=[['Todos','✨'],['Supermercado','🛒'],['Farmácia','💊'],['Restaurante','🍔'],['Moda','👕'],['Casa e decoração','🏠'],['Eletrônicos','📱'],['Automotivo','🚗'],['Pet shop','🐾']];
+const initialProducts=[
+{id:1,name:'Banana nanica (kg)',store:'Supermercado Aurora',category:'Supermercado',price:5.99,old:7.49,emoji:'🍌'},
+{id:2,name:'Tomate (kg)',store:'Supermercado Aurora',category:'Supermercado',price:6.49,emoji:'🍅'},
+{id:3,name:'Arroz tipo 1 — 5 kg',store:'Supermercado Aurora',category:'Supermercado',price:24.90,old:28.90,emoji:'🍚'},
+{id:4,name:'Tênis casual',store:'Vitrine Urbana',category:'Moda',price:159.90,emoji:'👟'},
+{id:5,name:'Fone Bluetooth',store:'EletroSinop',category:'Eletrônicos',price:89.90,old:119.90,emoji:'🎧'},
+{id:6,name:'Kit de ferramentas',store:'Casa Aurora',category:'Casa e decoração',price:79.90,emoji:'🧰'},
+{id:7,name:'Pizza grande',store:'Forno da Praça',category:'Restaurante',price:49.90,emoji:'🍕'},
+{id:8,name:'Shampoo 350 ml',store:'Farmácia Sinop',category:'Farmácia',price:18.50,emoji:'🧴'}
 ];
-const products = [
-  {id:1,name:'Banana nanica (kg)',store:'Supermercado Aurora',category:'Supermercado',price:5.99,old:7.49,emoji:'🍌'},
-  {id:2,name:'Tomate (kg)',store:'Supermercado Aurora',category:'Supermercado',price:6.49,emoji:'🍅'},
-  {id:3,name:'Arroz tipo 1 — 5 kg',store:'Supermercado Aurora',category:'Supermercado',price:24.90,old:28.90,emoji:'🍚'},
-  {id:4,name:'Tênis casual',store:'Vitrine Urbana',category:'Moda',price:159.90,emoji:'👟'},
-  {id:5,name:'Fone Bluetooth',store:'EletroSinop',category:'Eletrônicos',price:89.90,old:119.90,emoji:'🎧'},
-  {id:6,name:'Kit de ferramentas',store:'Casa Aurora',category:'Casa e decoração',price:79.90,emoji:'🧰'},
-  {id:7,name:'Pizza grande',store:'Forno da Praça',category:'Restaurante',price:49.90,emoji:'🍕'},
-  {id:8,name:'Shampoo 350 ml',store:'Farmácia Sinop',category:'Farmácia',price:18.50,emoji:'🧴'},
+const initialStores=[
+{name:'Supermercado Aurora',kind:'Supermercado',rating:'—',units:'2 unidades',emoji:'🛒'},
+{name:'Farmácia Sinop',kind:'Farmácia',rating:'—',units:'3 unidades',emoji:'💊'},
+{name:'Casa Aurora',kind:'Casa e materiais',rating:'—',units:'2 unidades',emoji:'🏠'},
+{name:'EletroSinop',kind:'Eletrônicos',rating:'—',units:'1 unidade',emoji:'📱'}
 ];
-const stores = [
-  {name:'Supermercado Aurora',kind:'Supermercado',rating:'4,8',units:'2 unidades',emoji:'🛒'},
-  {name:'Farmácia Sinop',kind:'Farmácia',rating:'4,9',units:'3 unidades',emoji:'💊'},
-  {name:'Casa Aurora',kind:'Casa e materiais',rating:'4,7',units:'2 unidades',emoji:'🏠'},
-  {name:'EletroSinop',kind:'Eletrônicos',rating:'4,8',units:'1 unidade',emoji:'📱'}
+const initialAds=[
+{id:1,type:'Promoção',icon:'🏷️',title:'Semana de ofertas no supermercado',company:'Supermercado Aurora',detail:'Exemplo ilustrativo de promoção. Consulte condições e disponibilidade na loja.',location:'Sinop – MT'},
+{id:2,type:'Vaga de emprego',icon:'💼',title:'Oportunidade: atendente de loja',company:'Comércio demonstrativo',detail:'Exemplo ilustrativo. Vaga real deverá informar requisitos, jornada, remuneração e candidatura.',location:'Sinop – MT'},
+{id:3,type:'Serviço',icon:'🛠️',title:'Manutenção e pequenos reparos',company:'Prestador demonstrativo',detail:'Exemplo de divulgação de serviço e área atendida.',location:'Sinop – MT'}
 ];
-const money = n => n.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+const adTypes=['Todos','Promoção','Vaga de emprego','Serviço','Evento','Comunicado','Imóveis','Veículos'];
+const money=n=>n.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
 
 function App(){
-  const [category,setCategory] = useState('Todos');
-  const [search,setSearch] = useState('');
-  const [cart,setCart] = useState({});
-  const [showCart,setShowCart] = useState(false);
-  const [tab,setTab] = useState('Início');
-  const [notice,setNotice] = useState('');
-  const visible = useMemo(()=>products.filter(p=>(category==='Todos'||p.category===category) && (p.name+' '+p.store).toLowerCase().includes(search.toLowerCase())),[category,search]);
-  const count = Object.values(cart).reduce((a,b)=>a+b,0);
-  const total = products.reduce((s,p)=>s+p.price*(cart[p.id]||0),0);
-  function add(p){setCart(c=>({...c,[p.id]:(c[p.id]||0)+1}));setNotice(p.name+' adicionado ao carrinho');setTimeout(()=>setNotice(''),2200)}
-  function change(id,delta){setCart(c=>{const n=(c[id]||0)+delta;const next={...c};if(n<=0)delete next[id];else next[id]=n;return next})}
-  return <div className="app">
-    <header className="top"><div className="brand"><div className="brand-icon">S</div><span>Sinop<span className="mix">Mix</span></span></div>
-      <div className="location"><MapPin size={16}/> Entregar em: <b>Sinop – MT</b></div>
-      <button className="cart-top" onClick={()=>setShowCart(true)} aria-label="Abrir carrinho"><ShoppingCart/><span>{count}</span></button>
-    </header>
-    <main>
-      <section className="hero">
-        <div className="hero-copy"><span className="eyebrow">O comércio da nossa cidade</span><h1>Sinop compra.<br/><em>SinopMix entrega.</em></h1><p>Encontre lojas, produtos e ofertas de Sinop em um só lugar.</p></div>
-        <div className="hero-art"><div className="sun"></div><div className="shop-bag">🛍️</div><div className="city-label">SINOP · MT</div></div>
-      </section>
-      <div className="searchbar"><Search size={20}/><input value={search} onChange={e=>setSearch(e.target.value)} placeholder="O que você procura em Sinop?"/></div>
-      <section className="section">
-        <div className="section-head"><div><span className="eyebrow">Explore</span><h2>Categorias</h2></div></div>
-        <div className="categories">{categories.map(([name,emoji])=><button key={name} className={'category '+(category===name?'selected':'')} onClick={()=>{setCategory(name);setTab('Início')}}><span>{emoji}</span>{name}</button>)}</div>
-      </section>
-      <section className="section">
-        <div className="section-head"><div><span className="eyebrow">Selecionados para você</span><h2>{category==='Todos'?'Ofertas em Sinop':category}</h2></div><button className="text-button" onClick={()=>setCategory('Todos')}>Ver tudo →</button></div>
-        <div className="products">{visible.map(p=><article className="product" key={p.id}><div className="product-image"><span>{p.emoji}</span>{p.old&&<small>OFERTA</small>}<button className="heart" aria-label="Favoritar"><Heart size={17}/></button></div><div className="product-info"><small>{p.store}</small><b>{p.name}</b><div className="price">{money(p.price)} {p.old&&<del>{money(p.old)}</del>}</div><button className="add" onClick={()=>add(p)}><Plus size={17}/> Adicionar</button></div></article>)}</div>
-        {visible.length===0&&<div className="empty">Não encontramos produtos com essa busca. Tente outra palavra ou categoria.</div>}
-      </section>
-      <section className="section">
-        <div className="section-head"><div><span className="eyebrow">Compre perto de você</span><h2>Lojas em destaque</h2></div><button className="text-button" onClick={()=>setNotice('O catálogo de lojas será ampliado na próxima etapa.')}>Ver todas →</button></div>
-        <div className="stores">{stores.map(s=><article className="store" key={s.name}><div className="store-icon">{s.emoji}</div><div><b>{s.name}</b><small>{s.kind} · ⭐ {s.rating}</small><small>{s.units}</small></div><button aria-label={'Ver '+s.name} onClick={()=>setNotice('Página de '+s.name+' será ativada na próxima etapa.')}>Ver loja</button></article>)}</div>
-      </section>
-      <section className="trust"><div><Truck/><b>Entrega local</b><small>Consulte as opções da loja</small></div><div><ShieldCheck/><b>Compra acompanhada</b><small>Pedidos em um só lugar</small></div><div><Store/><b>Valorize Sinop</b><small>Apoie o comércio local</small></div></section>
-    </main>
-    <nav className="bottom">{[['Início','⌂'],['Categorias','▦'],['Ofertas','%'],['Pedidos','□'],['Perfil','♙']].map(([n,i])=><button key={n} className={tab===n?'active':''} onClick={()=>{setTab(n);if(n==='Pedidos'||n==='Perfil')setNotice(n+': esta área será conectada na próxima etapa.');if(n==='Categorias')document.querySelector('.categories')?.scrollIntoView({behavior:'smooth'});if(n==='Ofertas'){setCategory('Todos');document.querySelector('.products')?.scrollIntoView({behavior:'smooth'})}}}><span>{i}</span>{n}</button>)}</nav>
-    {showCart&&<div className="overlay" onClick={()=>setShowCart(false)}><aside className="drawer" onClick={e=>e.stopPropagation()}><div className="drawer-head"><h2>Meu carrinho</h2><button onClick={()=>setShowCart(false)}><X/></button></div>{count===0?<p className="empty">Seu carrinho está vazio.</p>:<>{products.filter(p=>cart[p.id]).map(p=><div className="cart-line" key={p.id}><span className="cart-emoji">{p.emoji}</span><div className="cart-desc"><b>{p.name}</b><small>{money(p.price)}</small></div><div className="qty"><button onClick={()=>change(p.id,-1)}><Minus size={14}/></button>{cart[p.id]}<button onClick={()=>change(p.id,1)}><Plus size={14}/></button></div></div>)}<div className="total"><span>Subtotal demonstrativo</span><b>{money(total)}</b></div><button className="checkout" onClick={()=>{setShowCart(false);setNotice('Checkout demonstrativo. Pagamentos ainda não estão ativados.')}}>Continuar compra</button><small className="disclaimer">Protótipo: nenhum pagamento será processado.</small></>}</aside></div>}
-    {notice&&<div className="toast">{notice}</div>}
-    <footer>SinopMix · Marketplace Local de Sinop – MT <span>Versão inicial demonstrativa</span></footer>
-  </div>
+ const [category,setCategory]=useState('Todos'),[search,setSearch]=useState(''),[cart,setCart]=useState({}),[showCart,setShowCart]=useState(false);
+ const [tab,setTab]=useState('Início'),[notice,setNotice]=useState(''),[products,setProducts]=useState(initialProducts),[stores,setStores]=useState(initialStores),[ads,setAds]=useState(initialAds);
+ const [adFilter,setAdFilter]=useState('Todos'),[company,setCompany]=useState(''),[companyKind,setCompanyKind]=useState('Comércio'),[companyCity,setCompanyCity]=useState('Sinop – MT');
+ const [adType,setAdType]=useState('Promoção'),[adBrief,setAdBrief]=useState(''),[adCompany,setAdCompany]=useState(''),[prepared,setPrepared]=useState(null),[notify,setNotify]=useState(true);
+ const [adminSection,setAdminSection]=useState('Visão geral');
+ const visible=useMemo(()=>products.filter(p=>(category==='Todos'||p.category===category)&&(p.name+' '+p.store).toLowerCase().includes(search.toLowerCase())),[products,category,search]);
+ const visibleAds=useMemo(()=>ads.filter(a=>(adFilter==='Todos'||a.type===adFilter)&&(a.title+' '+a.company+' '+a.detail).toLowerCase().includes(search.toLowerCase())),[ads,adFilter,search]);
+ const count=Object.values(cart).reduce((a,b)=>a+b,0),total=products.reduce((s,p)=>s+p.price*(cart[p.id]||0),0);
+ const flash=m=>{setNotice(m);setTimeout(()=>setNotice(''),3000)};
+ function add(p){setCart(c=>({...c,[p.id]:(c[p.id]||0)+1}));flash(p.name+' adicionado ao carrinho')}
+ function change(id,d){setCart(c=>{const n=(c[id]||0)+d,next={...c};if(n<=0)delete next[id];else next[id]=n;return next})}
+ function registerCompany(e){e.preventDefault();if(!company.trim())return;setStores(s=>[...s,{name:company.trim(),kind:companyKind,rating:'—',units:'1 unidade',emoji:'🏬'}]);flash('Empresa adicionada à lista demonstrativa. Para salvar permanentemente, falta conectar o banco de dados.');setCompany('')}
+ function prepareAd(e){e.preventDefault();if(!adBrief.trim()||!adCompany.trim()){flash('Informe o nome da empresa e o que deseja anunciar.');return}
+ const title=adBrief.trim().replace(/[.!?]+$/,'');const result={id:Date.now(),type:adType,icon:adType==='Vaga de emprego'?'💼':adType==='Serviço'?'🛠️':adType==='Evento'?'📅':'🏷️',title,company:adCompany.trim(),detail:'Confira esta novidade de '+adCompany.trim()+'. Entre em contato com a empresa para consultar detalhes, condições e disponibilidade.',location:'Sinop – MT'};
+ setPrepared({ ...result,caption:'📣 '+title+'! '+result.detail+' #Sinop #SinopMix',status:'Rascunho preparado — aguardando revisão e publicação.'});}
+ function publishDraft(){if(!prepared)return;setAds(a=>[{...prepared,detail:prepared.detail+' Anúncio demonstrativo criado no painel.'},...a]);setPrepared(null);setAdBrief('');flash('Anúncio adicionado ao mural desta demonstração. A notificação é apenas simulada; envio real exige backend e serviço de notificações.')}
+ const isAdmin=tab==='Administrador';
+ return <div className="app">
+ <header className="top"><div className="brand"><div className="brand-icon">S</div><span>Sinop<span className="mix">Mix</span></span></div><div className="location"><MapPin size={16}/> Sinop – MT</div><button className="cart-top" onClick={()=>setShowCart(true)} aria-label="Abrir carrinho"><ShoppingCart/><span>{count}</span></button></header>
+ <main>
+ <section className="hero"><div className="hero-copy"><span className="eyebrow">O comércio e as oportunidades da nossa cidade</span><h1>Sinop compra.<br/><em>SinopMix conecta.</em></h1><p>Produtos, promoções, serviços, empregos e novidades de Sinop em um só lugar.</p></div><div className="hero-art"><div className="sun"></div><div className="shop-bag">🛍️</div><div className="city-label">SINOP · MT</div></div></section>
+ <div className="searchbar"><Search size={20}/><input value={search} onChange={e=>setSearch(e.target.value)} placeholder="Busque produtos, lojas, vagas e serviços em Sinop"/></div>
+ {!isAdmin?<><section className="section"><div className="section-head"><div><span className="eyebrow">Explore</span><h2>Categorias de produtos</h2></div></div><div className="categories">{categories.map(([n,em])=><button key={n} className={'category '+(category===n?'selected':'')} onClick={()=>setCategory(n)}><span>{em}</span>{n}</button>)}</div></section>
+ <section className="section"><div className="section-head"><div><span className="eyebrow">Compre local</span><h2>{category==='Todos'?'Ofertas em Sinop':category}</h2></div><button className="text-button" onClick={()=>setCategory('Todos')}>Ver tudo →</button></div><div className="products">{visible.map(p=><article className="product" key={p.id}><div className="product-image"><span>{p.emoji}</span>{p.old&&<small>OFERTA</small>}<button className="heart" aria-label="Favoritar"><Heart size={17}/></button></div><div className="product-info"><small>{p.store}</small><b>{p.name}</b><div className="price">{money(p.price)} {p.old&&<del>{money(p.old)}</del>}</div><button className="add" onClick={()=>add(p)}><Plus size={17}/> Adicionar</button></div></article>)}</div>{visible.length===0&&<div className="empty">Não encontramos produtos para essa busca.</div>}</section>
+ <section className="section" id="anuncios"><div className="section-head"><div><span className="eyebrow">Mural da cidade</span><h2>Anúncios e oportunidades</h2><p className="section-subtitle">Promoções, empregos, serviços, eventos e muito mais.</p></div><button className="announce-button" onClick={()=>setTab('Administrador')}><Megaphone size={17}/> Anunciar</button></div><div className="announcement-filters">{adTypes.map(t=><button key={t} className={adFilter===t?'chosen':''} onClick={()=>setAdFilter(t)}>{t}</button>)}</div><div className="announcement-grid">{visibleAds.map(a=><article className="announcement" key={a.id}><div className="announcement-top"><span className="announcement-icon">{a.icon}</span><span className="announcement-type">{a.type}</span></div><h3>{a.title}</h3><b className="announcement-company">{a.company}</b><p>{a.detail}</p><div className="announcement-meta"><span><MapPin size={14}/>{a.location}</span><small>SinopMix</small></div><button className="announcement-contact" onClick={()=>flash('Os contatos comerciais serão disponibilizados nos anúncios reais após cadastro e verificação.')}>Ver anúncio</button></article>)}</div><p className="demo-note">Os anúncios e empresas desta versão são demonstrativos.</p></section>
+ <section className="section"><div className="section-head"><div><span className="eyebrow">Compre perto de você</span><h2>Lojas em destaque</h2></div></div><div className="stores">{stores.map((s,i)=><article className="store" key={s.name+i}><div className="store-icon">{s.emoji}</div><div><b>{s.name}</b><small>{s.kind}</small><small>{s.units}</small></div><button onClick={()=>flash('Página da loja será habilitada após conexão do cadastro.')}>Ver loja</button></article>)}</div></section>
+ <section className="trust"><div><Truck/><b>Comércio local</b><small>Descubra lojas de Sinop</small></div><div><ShieldCheck/><b>Anúncios moderados</b><small>Conteúdo sujeito a revisão</small></div><div><Store/><b>Valorize Sinop</b><small>Apoie os negócios locais</small></div></section></>:<section className="admin-wrap">
+ <div className="admin-heading"><div><span className="eyebrow">Área restrita — demonstração</span><h2>Painel do administrador</h2><p>Cadastre empresas, organize anúncios e prepare campanhas para revisão.</p></div><span className="admin-chip"><ShieldCheck size={15}/> Administração</span></div>
+ <div className="admin-tabs">{['Visão geral','Empresas','Assistente de anúncios','Publicações'].map(s=><button className={adminSection===s?'active':''} onClick={()=>setAdminSection(s)} key={s}>{s}</button>)}</div>
+ {adminSection==='Visão geral'&&<><div className="admin-stats"><div><Building2/><b>{stores.length}</b><small>Empresas na lista</small></div><div><Megaphone/><b>{ads.length}</b><small>Anúncios no mural</small></div><div><Bell/><b>{notify?'Ativas (simulação)':'Desativadas'}</b><small>Notificações</small></div></div><div className="admin-panel"><h3>Atalhos administrativos</h3><div className="admin-shortcuts"><button onClick={()=>setAdminSection('Empresas')}><Building2/> Cadastrar empresa</button><button onClick={()=>setAdminSection('Assistente de anúncios')}><Sparkles/> Preparar anúncio com IA</button><button onClick={()=>setAdminSection('Publicações')}><ClipboardList/> Revisar publicações</button></div></div></>}
+ {adminSection==='Empresas'&&<div className="admin-panel"><h3>Cadastrar empresa ou comércio</h3><p>Inclua os dados básicos para organizar o diretório local. Este cadastro ainda fica apenas nesta sessão de demonstração.</p><form className="admin-form" onSubmit={registerCompany}><label>Nome da empresa<input value={company} onChange={e=>setCompany(e.target.value)} placeholder="Ex.: Loja Central" required/></label><label>Tipo de negócio<select value={companyKind} onChange={e=>setCompanyKind(e.target.value)}>{['Comércio','Supermercado','Farmácia','Restaurante','Prestador de serviços','Indústria','Imobiliária','Outro'].map(x=><option>{x}</option>)}</select></label><label>Cidade<input value={companyCity} onChange={e=>setCompanyCity(e.target.value)}/></label><button className="primary-action" type="submit"><Plus size={17}/> Adicionar empresa</button></form><div className="company-list"><h4>Empresas cadastradas nesta demonstração</h4>{stores.map((s,i)=><div key={s.name+i}><span>{s.emoji} {s.name}</span><small>{s.kind} · {s.units}</small></div>)}</div></div>}
+ {adminSection==='Assistente de anúncios'&&<div className="admin-panel"><div className="ai-title"><span className="ai-symbol"><Sparkles/></span><div><h3>Assistente de criação de anúncios</h3><p>Descreva o que a empresa quer divulgar. O protótipo organiza uma sugestão de texto para revisão.</p></div></div><form className="admin-form" onSubmit={prepareAd}><label>Empresa anunciante<input value={adCompany} onChange={e=>setAdCompany(e.target.value)} placeholder="Nome da empresa" required/></label><label>Tipo de anúncio<select value={adType} onChange={e=>setAdType(e.target.value)}>{adTypes.filter(t=>t!=='Todos').map(t=><option>{t}</option>)}</select></label><label>O que deseja anunciar?<textarea rows="4" value={adBrief} onChange={e=>setAdBrief(e.target.value)} placeholder="Ex.: Estamos contratando vendedor, de segunda a sexta, enviar currículo..." required/></label><button className="primary-action" type="submit"><Sparkles size={17}/> Preparar texto do anúncio</button></form>
+ {prepared&&<div className="prepared"><div className="prepared-head"><CheckCircle2/><b>Rascunho preparado para revisão</b></div><span className="announcement-type">{prepared.type}</span><h4>{prepared.title}</h4><b>{prepared.company}</b><p>{prepared.detail}</p><div className="caption-box">{prepared.caption}</div><div className="media-pending"><div><Image/><b>Imagem promocional</b><small>Geração de imagem será conectada</small></div><div><Video/><b>Vídeo curto</b><small>Geração de vídeo será conectada</small></div></div><p className="legal-note">A publicação não é automática nesta versão. A empresa/admin deverá revisar e aprovar o conteúdo antes de publicar. A geração real de mídia e os serviços de IA exigem integração e configuração próprias.</p><button className="primary-action" onClick={publishDraft}><CheckCircle2 size={17}/> Aprovar no mural demonstrativo</button></div>}
+ </div>}
+ {adminSection==='Publicações'&&<div className="admin-panel"><div className="section-head"><div><h3>Publicações e notificações</h3><p>Controle demonstrativo de conteúdo publicado no mural.</p></div></div><label className="toggle-line"><span><Bell/> Notificações para clientes</span><input type="checkbox" checked={notify} onChange={e=>setNotify(e.target.checked)}/></label><div className="company-list">{ads.map(a=><div key={a.id}><span>{a.icon} {a.title}</span><small>{a.type} · {a.company}</small></div>)}</div><p className="legal-note">O controle acima apenas simula a preferência. Envio de push, segmentação de clientes, agendamento e publicação automática ainda precisam de backend, permissões e provedor de notificações.</p></div>}
+ </section>}
+ </main>
+ <nav className="bottom">{[['Início','⌂'],['Categorias','▦'],['Anúncios','▤'],['Pedidos','□'],['Administrador','⚙']].map(([n,ic])=><button key={n} className={tab===n?'active':''} onClick={()=>{setTab(n);if(n==='Categorias')document.querySelector('.categories')?.scrollIntoView({behavior:'smooth'});if(n==='Anúncios')document.querySelector('#anuncios')?.scrollIntoView({behavior:'smooth'});if(n==='Pedidos')flash('A área de pedidos será conectada ao banco de dados na próxima etapa.')}}><span>{ic}</span>{n}</button>)}</nav>
+ {showCart&&<div className="overlay" onClick={()=>setShowCart(false)}><aside className="drawer" onClick={e=>e.stopPropagation()}><div className="drawer-head"><h2>Meu carrinho</h2><button onClick={()=>setShowCart(false)}><X/></button></div>{count===0?<p className="empty">Seu carrinho está vazio.</p>:<>{products.filter(p=>cart[p.id]).map(p=><div className="cart-line" key={p.id}><span className="cart-emoji">{p.emoji}</span><div className="cart-desc"><b>{p.name}</b><small>{money(p.price)}</small></div><div className="qty"><button onClick={()=>change(p.id,-1)}><Minus size={14}/></button>{cart[p.id]}<button onClick={()=>change(p.id,1)}><Plus size={14}/></button></div></div>)}<div className="total"><span>Subtotal demonstrativo</span><b>{money(total)}</b></div><button className="checkout" onClick={()=>{setShowCart(false);flash('Checkout demonstrativo. Pagamentos ainda não estão ativados.')}}>Continuar compra</button><small className="disclaimer">Nenhum pagamento será processado.</small></>}</aside></div>}
+ {notice&&<div className="toast">{notice}</div>}<footer>SinopMix · Marketplace e mural local de Sinop – MT <span>Versão inicial demonstrativa</span></footer>
+ </div>
 }
 createRoot(document.getElementById('root')).render(<App/>);
