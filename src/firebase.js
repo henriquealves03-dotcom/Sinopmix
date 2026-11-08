@@ -2,26 +2,22 @@ import { initializeApp, getApps } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 
-// O app só inicializa depois que o .env local estiver configurado.
+// Configuração pública do aplicativo Web SinopMix.
+// Não coloque credenciais privadas ou service accounts neste arquivo.
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  apiKey: "AIzaSyDHZwgcreSKv3PKX0gSwIrw2MiRTCFxV_U",
+  authDomain: "sinopmix.firebaseapp.com",
+  projectId: "sinopmix",
+  storageBucket: "sinopmix.firebasestorage.app",
+  messagingSenderId: "910376976621",
+  appId: "1:910376976621:web:6830c8938c7fff3a76cce4",
 };
 
-export const isFirebaseConfigured = Boolean(
-  firebaseConfig.apiKey &&
-  firebaseConfig.authDomain &&
-  firebaseConfig.projectId &&
-  firebaseConfig.appId
-);
+export const isFirebaseConfigured = true;
 
-export const firebaseApp = isFirebaseConfigured
-  ? (getApps().length ? getApps()[0] : initializeApp(firebaseConfig))
-  : null;
+export const firebaseApp = getApps().length
+  ? getApps()[0]
+  : initializeApp(firebaseConfig);
 
-export const auth = firebaseApp ? getAuth(firebaseApp) : null;
-export const db = firebaseApp ? getFirestore(firebaseApp) : null;
+export const auth = getAuth(firebaseApp);
+export const db = getFirestore(firebaseApp);
