@@ -25,10 +25,10 @@ Os anúncios devem ficar organizados por categoria, com busca e filtros para o c
 ## Cobrança pelos anúncios de casas e kitnets
 - O SinopMix cobrará um **valor específico pela publicação do anúncio** de cada casa ou kitnet para aluguel.
 - Essa cobrança remunera somente a divulgação do imóvel na plataforma. **Não é comissão sobre o aluguel, não é percentual do contrato e não depende de o proprietário conseguir alugar o imóvel.**
-- O proprietário paga pelo anúncio conforme o preço e as condições apresentados antes de publicar. O valor exato, prazo de exibição e eventuais opções de destaque ainda serão definidos.
+- **Preço definido: R$ 19,90 por anúncio a cada 2 meses (60 dias) de divulgação.** O proprietário paga pelo período de divulgação, independentemente de conseguir alugar o imóvel nesse intervalo. Ao fim dos 60 dias, poderá renovar por mais 60 dias mediante novo pagamento.
 - O SinopMix não recebe aluguel, caução, depósito, sinal ou qualquer pagamento da locação. O interessado negocia e paga diretamente ao proprietário, fora do aplicativo.
 - A cobrança de anúncio imobiliário será separada da mensalidade comercial de R$ 49,90 e das reservas de hotéis/pousadas.
-- Não ativar cobranças nem definir preço final sem autorização expressa do responsável pelo projeto.
+- O anúncio deve exibir claramente a data de início e de término do período de 60 dias, além da opção de renovação. Não cobrar automaticamente uma renovação sem autorização do proprietário.
 
 ## Aluguel de casas e kitnets
 - Pessoas físicas proprietárias e imobiliárias poderão anunciar casas e kitnets para aluguel, separadamente da área de hospedagem por diária.
